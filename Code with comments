@@ -1,0 +1,77 @@
+/* to generate random number */
+import java.util.Random;
+/* to take input from user */
+import java.util.Scanner;
+
+/* main working class */
+class GuessTheNumber {
+
+  /* main method */
+  public static void main(String[] args) {
+    /* creating instance of scanner & random number,
+      that'll be helpful in taking input from the user
+      and generating a random number respectively. 
+    */
+    Scanner in = new Scanner(System.in);
+    Random rand = new Random();
+
+    int guessedNumber; // to store number guessed by the user
+
+    /* taking user name as input via the above scanner object 'in'.*/
+    System.out.println("Hello! What is your name?\n\n");
+    String name = in.nextLine();
+
+    System.out.println(
+      "Well, " + name + ", I am thinking of a number between 1 and 20."
+    );
+
+    /* This loop will keep iterating as long as user wants... */
+    while (true) {
+      /* generating the random number within range 20,  */
+      int secretNumber = rand.nextInt(20) + 1;
+
+      /* It will iterate 6 times, to take the guess and 7th time 
+        just to inform the user about his/her failure. 
+      */
+      for (int i = 0; i < 7; i++) {
+        /* if it's 7th iteration, it means user has lost the guessing game, */
+        if (i == 6) {
+          System.out.println("You failed to guess within 6 tries!");
+          break;
+        }
+
+        /* asking the user to take a guess */
+        System.out.println("Take a guess\n\n");
+        guessedNumber = in.nextInt();
+
+        /* if number is greater/smaller than the actual number, it will show the respective message to user */
+        if (guessedNumber > secretNumber) {
+          System.out.println("Your guess is too high.");
+        }
+        if (guessedNumber < secretNumber) {
+          System.out.println("Your guess is too low.");
+        } else if (guessedNumber == secretNumber) {
+          System.out.println(
+            "Good job," +
+            name +
+            "! You guessed my number in " +
+            (i + 1) +
+            " guesses!"
+          );
+          break;
+        }
+      }
+
+      // asking the user, if one wants to play again or not...
+      System.out.print("Would  you like to play again? (y or n) : ");
+      char ask = in.next().charAt(0);
+
+      /* if user want to play again, the loop will iterate again, else it will end the code...  */
+      if (ask == 'y') {
+        continue;
+      } else {
+        break;
+      }
+    }
+  }
+}
